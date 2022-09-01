@@ -1,10 +1,17 @@
 import React from 'react'
+import Question from './Question'
 
 const QuizView = () => {
+
+
+
   return (
-    <>
-      Test
-    </>
+    <div className="quiz-view">
+      <Question />
+      <Question />
+      <Question />
+      <Question />
+    </div>
   )
 }
 
