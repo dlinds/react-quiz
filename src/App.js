@@ -6,9 +6,10 @@ import yellowBlob from './img/blobYellow.png'
 const App = () => {
 
   const [view, setView] = React.useState(
-    <StartPage
-      setView={beginQuiz}
-    />
+    // <StartPage
+    //   setView={beginQuiz}
+    // />
+    <QuizView />
   )
 
   function beginQuiz() {
