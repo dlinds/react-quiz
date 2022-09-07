@@ -2,34 +2,38 @@ import React from 'react'
 
 const Question = ({ question, selectAnswer }) => {
 
+  // const classCalc = () => {
+  // ${(question.correct !== null
+  //   && question.answer === question[aNum]
+  //   && question.selected === aNum)
+  //   ? question.correct === true ? "question--answer_selected-correct" : null
+  //   : question.selected === aNum && question.correct === false ? "question--answer_selected-incorrect" : null}`}
+  // }
+
+  const answerInputs = () => {
+    const answerNumbers = ["a1", "a2", "a3", "a4"]
+    return (
+      answerNumbers.map(aNum => (
+        <input
+          key={aNum}
+          type="button"
+          value={question[aNum]}
+          className={`question--answer
+          ${question.selected === aNum ? "question--answer_selected" : null}
+          ${question.correct !== null && question.answer === question[aNum] ? "question--answer_selected-correct" : null}
+          ${question.selected === aNum && question.correct === false ? "question--answer_selected-incorrect" : null}`}
+          onClick={() => selectAnswer(question.id, aNum)}
+        />
+      ))
+    )
+  }
+
+
   return (
     <div className="question">
       <h1>{question.q}</h1>
       <div className="question--answer-group">
-        <input
-          type="button"
-          value={question.a1}
-          className={`question--answer ${question.selected === "a1" ? "question--answer_selected" : null}`}
-          onClick={() => selectAnswer(question.id, 'a1')}
-        />
-        <input
-          type="button"
-          value={question.a2}
-          className={`question--answer ${question.selected === "a2" ? "question--answer_selected" : null}`}
-          onClick={() => selectAnswer(question.id, 'a2')}
-        />
-        <input
-          type="button"
-          value={question.a3}
-          className={`question--answer ${question.selected === "a3" ? "question--answer_selected" : null}`}
-          onClick={() => selectAnswer(question.id, 'a3')}
-        />
-        <input
-          type="button"
-          value={question.a4}
-          className={`question--answer ${question.selected === "a4" ? "question--answer_selected" : null}`}
-          onClick={() => selectAnswer(question.id, 'a4')}
-        />
+        {answerInputs()}
       </div>
       <hr />
     </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Question from './Question'
-const { uuid } = require('uuidv4');
+import { v4 as uuidv4 } from 'uuid';
 
 const QuizView = () => {
 
@@ -16,14 +16,15 @@ const QuizView = () => {
       const possibleAnswers = [...question.incorrect_answers, question.correct_answer].sort()
 
       return {
-        id: uuid(),
+        id: uuidv4(),
         q: question.question,
         a1: possibleAnswers[0],
         a2: possibleAnswers[1],
         a3: possibleAnswers[2],
         a4: possibleAnswers[3],
         answer: question.correct_answer,
-        selected: null
+        selected: null,
+        correct: null
       }
     })
   }
@@ -35,7 +36,7 @@ const QuizView = () => {
     setQuestionAndAnswers(newSetOfQuestions)
   }
 
-  React.useEffect(() => updateQuestions(), [])
+  React.useEffect(() => (updateQuestions()), [])
 
   const handleSelectingAnswer = (id, guess) => {
     setQuestionAndAnswers(prevQA => {
@@ -50,6 +51,24 @@ const QuizView = () => {
     })
   }
 
+  const handleCheckAnswers = () => {
+    setQuestionAndAnswers(prev => (
+      prev.map(aq => {
+        return aq.answer === aq[aq.selected]
+          ? {
+            ...aq,
+            correct: true
+          }
+          : {
+            ...aq,
+            correct: false
+          }
+      })
+    ))
+  }
+
+  console.log(questionAndAnswers)
+
   return (
     <div className="quiz-view">
       <div>
@@ -61,6 +80,7 @@ const QuizView = () => {
           />
         ))}
       </div>
+      <button onClick={() => handleCheckAnswers()}>Check Answers</button>
     </div>
   )
 }
