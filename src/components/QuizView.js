@@ -78,6 +78,8 @@ const QuizView = () => {
     buttonText === "Check Answers" ? checkAnswers() : resetGame()
   }
 
+  console.log(questionAndAnswers)
+
   return (
     <div className="quiz-view">
       <div>

@@ -5,7 +5,7 @@ const StartPage = (props) => {
     <div className="start-page">
       <h4>Quizzical</h4>
       <p>Some description if needed</p>
-      <button onClick={props.setView}>Start Quiz</button>
+      <button onClick={props.setBegin}>Start Quiz</button>
     </div>
   )
 }

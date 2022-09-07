@@ -5,23 +5,12 @@ import blueBlob from './img/blobBlue.png'
 import yellowBlob from './img/blobYellow.png'
 const App = () => {
 
-  const [view, setView] = React.useState(
-    // <StartPage
-    //   setView={beginQuiz}
-    // />
-    <QuizView />
-  )
-
-  function beginQuiz() {
-    setView(
-      <QuizView />
-    )
-  }
+  const [begin, setBegin] = React.useState(false)
 
   return (
     <>
       <img className="yellow-circle" src={yellowBlob} alt="yellow blob" />
-      {view}
+      {begin ? <QuizView /> : <StartPage setBegin={() => setBegin(true)} />}
       <img className="blue-circle" src={blueBlob} alt="blue blob" />
     </>
   )
