@@ -29,6 +29,7 @@ const QuizView = () => {
     })
   }
 
+  const [buttonText, setButtonText] = React.useState("Check Answers")
   const [questionAndAnswers, setQuestionAndAnswers] = React.useState([])
 
   const updateQuestions = async () => {
@@ -51,7 +52,12 @@ const QuizView = () => {
     })
   }
 
-  const handleCheckAnswers = () => {
+  const resetGame = () => {
+    updateQuestions()
+    setButtonText("Check Answers")
+  }
+
+  const checkAnswers = () => {
     setQuestionAndAnswers(prev => (
       prev.map(aq => {
         return aq.answer === aq[aq.selected]
@@ -65,9 +71,12 @@ const QuizView = () => {
           }
       })
     ))
+    setButtonText("Play Again")
   }
 
-  console.log(questionAndAnswers)
+  const handleButtonClick = () => {
+    buttonText === "Check Answers" ? checkAnswers() : resetGame()
+  }
 
   return (
     <div className="quiz-view">
@@ -80,7 +89,12 @@ const QuizView = () => {
           />
         ))}
       </div>
-      <button onClick={() => handleCheckAnswers()}>Check Answers</button>
+      <div className="quiz-footer">
+        {`${questionAndAnswers.filter(x => x.correct === null).length !== 5
+          ? "You scored " + questionAndAnswers.filter(x => x.correct === true).length + "/5 correct answers"
+          : ""}`}
+        <button onClick={() => handleButtonClick()}>{buttonText}</button>
+      </div>
     </div>
   )
 }
